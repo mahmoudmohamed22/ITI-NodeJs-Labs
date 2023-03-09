@@ -1,0 +1,52 @@
+import Express  from "express";
+import {addUserToFile,deleteUserFromFile,getAllDataFromFile,getUserById,UpdateById,diplayUser} from "./helpers/operationfun.mjs"
+const app=Express();
+
+app.use(Express.json()) //require to hold body in post 
+
+//end point to get all data 
+app.get("/posts",(req,res)=>{
+   // const posts = JSON.parse(readUsersFromFile("db.json"));
+    fs.readFile('db.json', (err, data) => {
+        if (err) throw err;
+        let posts = JSON.parse(data);
+        res.status(200).send(posts) 
+    });
+    
+})
+
+app.post("/post",(req,res)=>{
+    const { id,post } = req.body;
+
+})
+app.delete("/posts/:id",(req,res)=>{
+    const id = parseInt(request.params)
+    res.send(id)
+    const posts = JSON.parse("");
+    if(posts.length>0){
+    
+    const getPost =posts.find(posts => posts.id == id);
+    
+    if(getPost!=undefined){ //if user is exist in database
+
+    const index = posts.indexOf(getPost); //know index for removal user
+  
+    const removePost = posts.splice(index, 1); //remove user by index 
+  
+    writeUserIntoFile("db.json", JSON.stringify(posts));
+
+     }else{  res.send("......................")}
+    }else 
+    {
+        res.send("************")
+    }
+    res.status(200).send(`post deleted with ID: ${id}`)
+})
+
+
+
+app.put("/post",(req,res)=>{
+    res.send()
+})
+
+
